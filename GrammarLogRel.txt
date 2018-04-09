@@ -1,15 +1,14 @@
 <INIT> ::= <EXPR>
 	| id assign <TYPE>
-<EXPR> ::= <LOG_EXPR>
+<EXPR> ::= <LOG_TERM>
 	| <RELATION_EXPR>
 	| <ARITHM_EXPR>
-<LOG_EXPR> ::= <LOG_TERM>
 <LOG_TERM> ::= <LOG_TERM> and <LOG_FACTOR>
 	| <LOG_TERM> or <LOG_FACTOR>
 	| <LOG_FACTOR>
 <LOG_FACTOR> ::= bool
 	| not <LOG_FACTOR>
-	| lparen <LOG_EXPR> rparen
+	| lparen <LOG_TERM> rparen
 	| lparen <RELATION_EXPR> rparen
 <RELATION_EXPR> ::= <ARITHM_EXPR> greater <ARITHM_EXPR>
 	| <ARITHM_EXPR> greaterequal <ARITHM_EXPR>
