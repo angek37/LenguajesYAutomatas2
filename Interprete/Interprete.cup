@@ -24,48 +24,62 @@ terminal String DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
 terminal String ID, ASSIGN;
 terminal Boolean BOOL;
 terminal Integer INTEGER;
-terminal PUNTO;
 
-non terminal init, expr, log_factor, arithm_term, arithm_factor, type;
+non terminal stmt, expr, log_factor, arithm_term, arithm_factor, type;
 non terminal Integer arithm_expr;
 non terminal Boolean relation_expr, log_term;
 
-precedence lef ASSIGN;
+precedence left ASSIGN;
 precedence left AND, OR, NOT;
 precedence left EQUAL, NOTEQUAL;
-precedence left GRATER, GREATEREQUAL, LESS, LESSEQUAL;
+precedence left GREATER, GREATEREQUAL, LESS, LESSEQUAL;
 precedence left PLUS, MINUS;
 precedence left DIVIDE, TIMES;
 precedence left ID;
 
-expr_list ::= expr_list expr_part
-            | expr_part
+stmt        ::= expr
+            | ID ASSIGN type
             ;
 
-expr_part ::= expr:e SEMI {: System.out.println("Operación exitosa resultado = "
-                                                    + e.intValue());:}
-            | ID:i ASSIGN expr:e SEMI{:
-                  System.out.println(i+"<-"+e.intValue());
-                  map.put(i,e.intValue());
-              :}
-            | PUNTO {: System.out.println("Archivo procesado exitosamente ");
-            System.exit(1);
-              :}
-              ;
+expr        ::= log_term
+            | relation_expr
+            | arithm_expr
+            ;
 
-expr ::= NUMBER:n {:RESULT = n;:}
-      | ID:i {:
-        if(map.get(i)!=null){RESULT = map.get(i);}else{System.out.println("Variable "+i+" no declarada.");}
-        :}
-      | expr:l PLUS expr:r {:RESULT = new Integer(l.intValue() + r.intValue());:}
-      | expr:l MINUS expr:r {:RESULT = new Integer(l.intValue() - r.intValue());:}
-      | expr:l DIVIDE expr:r {:if(r.intValue() != 0){ RESULT = new Integer(l.intValue() / r.intValue());}
-      else{
-        System.out.println("Error semántico, división por cero");
-        System.exit(1);
-      }:}
-      | expr:l MOD expr:r {:RESULT = new Integer(l.intValue()%r.intValue());:}
-      | expr:l TIMES expr:r {:RESULT = new Integer(l.intValue()*r.intValue());:}
-      | expr:l LPAREN expr:e RPAREN{:RESULT=e;:}
-      | error SEMI {:System.out.println("Error de sintaxis");:}
-      ;
+log_term    ::= log_term AND log_factor
+            | log_term OR log_factor
+            | log_factor
+            ;
+
+log_factor  ::= BOOL
+            | NOT log_factor
+            | LPAREN log_term RPAREN
+            | LPAREN relation_expr RPAREN
+            ;
+
+relation_expr ::= arithm_expr GREATER arithm_expr
+            | arithm_expr GREATEREQUAL arithm_expr
+            | arithm_expr LESS arithm_expr
+            | arithm_expr LESSEQUAL arithm_expr
+            | arithm_expr EQUAL arithm_expr
+            | arithm_expr NOTEQUAL arithm_expr
+            ;
+arithm_expr ::= arithm_term
+            | arithm_expr TIMES arithm_term
+            | arithm_expr DIVIDE arithm_term
+            ;
+
+arithm_term ::= arithm_factor
+            | arithm_term PLUS arithm_factor
+            | arithm_term MINUS arithm_factor
+            ;
+
+arithm_factor ::= ID
+            | INTEGER
+            | LPAREN arithm_expr RPAREN
+            ;
+
+type        ::= INTEGER
+            | BOOL
+            | expr
+            ;

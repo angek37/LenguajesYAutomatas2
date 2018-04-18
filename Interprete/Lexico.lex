@@ -35,5 +35,4 @@ import java_cup.runtime.Symbol;
 [0-9]+ {return new Symbol(sym.INTEGER, new Integer(yytext()));}
 True|False {return new Symbol(sym.BOOL, new String(yytext()));}
 [\t\r\n\f] { }
-"." {return new Symbol(sym.PUNTO);}
 . {System.out.println("Caracter ilegal: "+yytext());}
