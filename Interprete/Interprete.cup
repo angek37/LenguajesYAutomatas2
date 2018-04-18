@@ -19,26 +19,27 @@ action code
   Map<String, Integer> map = new HashMap<String, Integer>();
 :}
 
-terminal String GREATER, GREATEREQUAL, LESS, LESSEQUAL, EQUAL, NOTEQUAL;
-terminal String DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
-terminal String ID, ASSIGN;
+terminal GREATER, GREATEREQUAL, LESS, LESSEQUAL, EQUAL, NOTEQUAL;
+terminal DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
+terminal ID, ASSIGN, SEMI;
 terminal Boolean BOOL;
 terminal Integer INTEGER;
 
-non terminal stmt, expr, log_factor, arithm_term, arithm_factor, type;
+non terminal stmt, expr, log_factor, arithm_term, arithm_factor;
 non terminal Integer arithm_expr;
 non terminal Boolean relation_expr, log_term;
 
-precedence left ASSIGN;
+
 precedence left AND, OR, NOT;
 precedence left EQUAL, NOTEQUAL;
 precedence left GREATER, GREATEREQUAL, LESS, LESSEQUAL;
 precedence left PLUS, MINUS;
 precedence left DIVIDE, TIMES;
-precedence left ID;
+precedence left ASSIGN;
 
-stmt        ::= expr
-            | ID ASSIGN type
+
+stmt        ::= expr SEMI
+            | ID ASSIGN expr SEMI
             ;
 
 expr        ::= log_term
@@ -77,9 +78,4 @@ arithm_term ::= arithm_factor
 arithm_factor ::= ID
             | INTEGER
             | LPAREN arithm_expr RPAREN
-            ;
-
-type        ::= INTEGER
-            | BOOL
-            | expr
             ;

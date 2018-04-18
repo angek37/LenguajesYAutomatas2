@@ -233,18 +233,19 @@ class Yylex implements java_cup.runtime.Scanner {
 		/* 21 */ YY_NO_ANCHOR,
 		/* 22 */ YY_NO_ANCHOR,
 		/* 23 */ YY_NO_ANCHOR,
-		/* 24 */ YY_NO_ANCHOR
+		/* 24 */ YY_NO_ANCHOR,
+		/* 25 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,258,
-"17:9,15:2,17,15:2,17:19,3,17:4,1,17,11,12,10,7,17,8,16,9,14:10,17:2,6,5,4,1" +
-"7:2,13:26,17:6,13:26,17,2,17:131,0:2")[0];
+"18:9,17:2,18,17:2,18:18,17,4,18:4,2,18,11,12,10,7,18,8,18,9,16,15:9,18,13,6" +
+",1,5,18:2,14:26,18:6,14:26,18,3,18:131,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,25,
-"0,1,2,3,4,5,6,1:6,7,8,1:8,9,1")[0];
+	private int yy_rmap[] = unpackFromString(1,26,
+"0,1,2,3,4,5,6,1:7,7,8,1:7,9,1:2")[0];
 
-	private int yy_nxt[][] = unpackFromString(10,18,
-"1,2,23,3,4,5,6,7,8,9,10,11,12,13,14,15,16,24,-1:19,17,-1:21,19,-1:17,20,-1:" +
-"17,21,-1:17,22,-1:25,13:2,-1:17,14,-1:5,18,-1:15");
+	private int yy_nxt[][] = unpackFromString(10,19,
+"1,2,3,23,4,5,6,7,8,9,10,11,12,13,14,15,24,16,25,-1:20,17,-1:19,18,-1:17,20," +
+"-1:18,21,-1:18,22,-1:31,14:3,-1:17,15:2,-1:5,19,-1:15");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -296,19 +297,19 @@ class Yylex implements java_cup.runtime.Scanner {
 					case -2:
 						break;
 					case 2:
-						{System.out.println("Caracter ilegal: "+yytext());}
+						{return new Symbol(sym.ASSIGN, new String(yytext()));}
 					case -3:
 						break;
 					case 3:
-						{return new Symbol(sym.NOT, new String(yytext()));}
+						{System.out.println("Caracter ilegal: "+yytext());}
 					case -4:
 						break;
 					case 4:
-						{return new Symbol(sym.GREATER, new String(yytext()));}
+						{return new Symbol(sym.NOT, new String(yytext()));}
 					case -5:
 						break;
 					case 5:
-						{return new Symbol(sym.ASSIGN, new String(yytext()));}
+						{return new Symbol(sym.GREATER, new String(yytext()));}
 					case -6:
 						break;
 					case 6:
@@ -340,39 +341,39 @@ class Yylex implements java_cup.runtime.Scanner {
 					case -13:
 						break;
 					case 13:
-						{return new Symbol(sym.ID, new String(yytext()));}
+						{return new Symbol(sym.SEMI, new String(yytext()));}
 					case -14:
 						break;
 					case 14:
-						{return new Symbol(sym.INTEGER, new Integer(yytext()));}
+						{return new Symbol(sym.ID, new String(yytext()));}
 					case -15:
 						break;
 					case 15:
-						{ }
+						{return new Symbol(sym.INTEGER, new Integer(yytext()));}
 					case -16:
 						break;
 					case 16:
-						{return new Symbol(sym.PUNTO);}
+						{ }
 					case -17:
 						break;
 					case 17:
-						{return new Symbol(sym.AND, new String(yytext()));}
+						{return new Symbol(sym.EQUAL, new String(yytext()));}
 					case -18:
 						break;
 					case 18:
-						{return new Symbol(sym.OR, new String(yytext()));}
+						{return new Symbol(sym.AND, new String(yytext()));}
 					case -19:
 						break;
 					case 19:
-						{return new Symbol(sym.NOTEQUAL, new String(yytext()));}
+						{return new Symbol(sym.OR, new String(yytext()));}
 					case -20:
 						break;
 					case 20:
-						{return new Symbol(sym.GREATEREQUAL, new String(yytext()));}
+						{return new Symbol(sym.NOTEQUAL, new String(yytext()));}
 					case -21:
 						break;
 					case 21:
-						{return new Symbol(sym.EQUAL, new String(yytext()));}
+						{return new Symbol(sym.GREATEREQUAL, new String(yytext()));}
 					case -22:
 						break;
 					case 22:
@@ -384,8 +385,12 @@ class Yylex implements java_cup.runtime.Scanner {
 					case -24:
 						break;
 					case 24:
-						{System.out.println("Caracter ilegal: "+yytext());}
+						{return new Symbol(sym.INTEGER, new Integer(yytext()));}
 					case -25:
+						break;
+					case 25:
+						{System.out.println("Caracter ilegal: "+yytext());}
+					case -26:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);

@@ -1,5 +1,5 @@
-INIT -> EXPR
-	| id assign TYPE.
+STMT -> EXPR semi
+	| id assign EXPR semi.
 EXPR -> LOG_TERM
 	| RELATION_EXPR
 	| ARITHM_EXPR.
@@ -25,6 +25,3 @@ ARITHM_TERM -> ARITHM_FACTOR
 ARITHM_FACTOR -> id
 	| Integer
 	| lparen ARITHM_EXPR rparen.
-TYPE -> Integer
-	| bool
-	| EXPR.
