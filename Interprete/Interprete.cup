@@ -25,7 +25,7 @@ terminal ID, ASSIGN, SEMI;
 terminal Boolean BOOL;
 terminal Integer INTEGER;
 
-non terminal stmt, expr, log_factor, arithm_term, arithm_factor;
+non terminal stmt, stmt_part, stmt_list, expr, log_factor, arithm_term, arithm_factor;
 non terminal Integer arithm_expr;
 non terminal Boolean relation_expr, log_term;
 
@@ -38,8 +38,15 @@ precedence left DIVIDE, TIMES;
 precedence left ASSIGN;
 
 
-stmt        ::= expr SEMI
-            | ID ASSIGN expr SEMI
+stmt        ::= stmt stmt_part
+            | stmt_part
+            ;
+
+stmt_part   ::= stmt_list SEMI
+            ;
+
+stmt_list   ::= expr
+            | ID ASSIGN expr
             ;
 
 expr        ::= log_term
