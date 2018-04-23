@@ -47,6 +47,7 @@ stmt_part   ::= stmt_list SEMI
 
 stmt_list   ::= expr
             | ID ASSIGN expr
+            | error {:System.out.println("Error de sintaxis");:}
             ;
 
 expr        ::= log_term
