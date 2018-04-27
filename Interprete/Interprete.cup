@@ -22,12 +22,12 @@ action code
 terminal GREATER, GREATEREQUAL, LESS, LESSEQUAL, EQUAL, NOTEQUAL;
 terminal DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
 terminal ID, ASSIGN, SEMI;
-terminal Boolean BOOL;
+terminal Boolean VERDADERO, FALSO;
 terminal Integer INTEGER;
 
-non terminal stmt, stmt_part, stmt_list, expr, log_factor, arithm_term, arithm_factor;
-non terminal Integer arithm_expr;
-non terminal Boolean relation_expr, log_term;
+non terminal stmt, stmt_part, stmt_list, expr;
+non terminal Integer arithm_expr, arithm_term, arithm_factor;
+non terminal Boolean relation_expr, log_term, log_factor, bool;
 
 
 precedence left AND, OR, NOT;
@@ -43,11 +43,11 @@ stmt        ::= stmt stmt_part
             ;
 
 stmt_part   ::= stmt_list SEMI
+            | error {:System.out.println("Error de sintaxis");:}
             ;
 
 stmt_list   ::= expr
             | ID ASSIGN expr
-            | error {:System.out.println("Error de sintaxis");:}
             ;
 
 expr        ::= log_term
@@ -60,10 +60,14 @@ log_term    ::= log_term AND log_factor
             | log_factor
             ;
 
-log_factor  ::= BOOL
+log_factor  ::= bool
             | NOT log_factor
             | LPAREN log_term RPAREN
             | LPAREN relation_expr RPAREN
+            ;
+
+bool        ::= VERDADERO
+            | FALSO
             ;
 
 relation_expr ::= arithm_expr GREATER arithm_expr

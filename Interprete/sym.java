@@ -15,17 +15,18 @@ public class sym {
   public static final int SEMI = 19;
   public static final int NOTEQUAL = 7;
   public static final int NOT = 16;
+  public static final int VERDADERO = 20;
   public static final int GREATER = 2;
   public static final int LPAREN = 10;
   public static final int LESSEQUAL = 5;
   public static final int ID = 17;
+  public static final int FALSO = 21;
   public static final int EOF = 0;
   public static final int DIVIDE = 8;
   public static final int MINUS = 13;
   public static final int error = 1;
   public static final int ASSIGN = 18;
-  public static final int BOOL = 20;
-  public static final int INTEGER = 21;
+  public static final int INTEGER = 22;
   public static final int GREATEREQUAL = 3;
   public static final int LESS = 4;
   public static final String[] terminalNames = new String[] {
@@ -49,7 +50,8 @@ public class sym {
   "ID",
   "ASSIGN",
   "SEMI",
-  "BOOL",
+  "VERDADERO",
+  "FALSO",
   "INTEGER"
   };
 }
