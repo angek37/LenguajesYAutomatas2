@@ -47,61 +47,85 @@ stmt_part   ::= stmt_list SEMI
             {:System.out.println("Error de sintaxis");:}
             ;
 
-stmt_list   ::= expr
+stmt_list   ::= expr:e
+            {: System.out.println(e); :}
             | ID:id ASSIGN expr:data
             {: l.add(""+id, data); :}
             | EXIT
             {: System.exit(1); :}
             ;
 
-expr        ::= log_term
-            | relation_expr
-            | arithm_expr
+expr        ::= log_term:e
+            {: RESULT = e; :}
+            | relation_expr:e
+            {: RESULT = e; :}
+            | arithm_expr:e
+            {: RESULT = e; :}
             ;
 
-log_term    ::= log_term AND log_factor
-            | log_term OR log_factor
-            | log_factor
+log_term    ::= log_factor:e1 AND log_factor:e2
+            {: RESULT = new Boolean(e1.booleanValue() && e2.booleanValue()); :}
+            | log_factor:e1 OR log_factor:e2
+            {: RESULT = new Boolean(e1.booleanValue() || e2.booleanValue()); :}
+            | log_factor:e
+            {: RESULT = e; :}
             ;
 
-log_factor  ::= bool
-            | NOT log_factor
-            | LPAREN log_term RPAREN
-            | LPAREN relation_expr RPAREN
+log_factor  ::= bool:e
+            {: RESULT = e; :}
+            | NOT log_factor:e
+            {: RESULT = new Boolean(!e); :}
+            | LPAREN log_term:e RPAREN
+            {: RESULT = e; :}
+            | LPAREN relation_expr:e RPAREN
+            {: RESULT = e; :}
             ;
 
 bool        ::= TRUE
+            {: RESULT = new Boolean(true); :}
             | FALSE
+            {: RESULT = new Boolean(false); :}
             ;
 
-relation_expr ::= arithm_expr GREATER arithm_expr
-            | arithm_expr GREATEREQUAL arithm_expr
-            | arithm_expr LESS arithm_expr
-            | arithm_expr LESSEQUAL arithm_expr
-            | arithm_expr EQUAL arithm_expr
-            | arithm_expr NOTEQUAL arithm_expr
+relation_expr ::= arithm_expr:e1 GREATER arithm_expr:e2
+            {: RESULT = new Boolean(e1>e2); :}
+            | arithm_expr:e1 GREATEREQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1>=e2); :}
+            | arithm_expr:e1 LESS arithm_expr:e2
+            {: RESULT = new Boolean(e1<e2); :}
+            | arithm_expr:e1 LESSEQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1<=e2); :}
+            | arithm_expr:e1 EQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1==e2); :}
+            | arithm_expr:e1 NOTEQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1!=e2); :}
             ;
-arithm_expr ::= arithm_term
-            | arithm_expr:e1 TIMES arithm_term:e2
+arithm_expr ::= arithm_term: n
+            {: RESULT = n; :}
+            | arithm_term:e1 TIMES arithm_term:e2
             {: RESULT = new Integer(e1.intValue() * e2.intValue()); :}
-            | arithm_expr:e1 DIVIDE arithm_term:e2
+            | arithm_term:e1 DIVIDE arithm_term:e2
             {: RESULT = new Integer(e1.intValue() / e2.intValue()); :}
             ;
 
-arithm_term ::= arithm_factor
-            | arithm_term:e1 PLUS arithm_factor:e2
+arithm_term ::= arithm_factor: n
+            {: RESULT = n; :}
+            | arithm_factor:e1 PLUS arithm_factor:e2
             {: RESULT = new Integer(e1.intValue() + e2.intValue()); :}
-            | arithm_term:e1 MINUS arithm_factor:e2
+            | arithm_factor:e1 MINUS arithm_factor:e2
             {: RESULT = new Integer(e1.intValue() - e2.intValue()); :}
             ;
 
-arithm_factor ::= ID:id
+arithm_factor ::= ID:n
             {:
-              if(l.Type(""+id).equals("Integer")){
-                RESULT = new Integer((Integer)l.get(""+id));
+              if(l.Type(""+n).equals("Integer")){
+                RESULT = new Integer((Integer)l.get(""+n));
+              }else {
+                System.out.println("La variable no es de tipo Integer");
               }
             :}
             | INTEGER: n
             {: RESULT = n; :}
-            | LPAREN arithm_expr RPAREN
+            | LPAREN arithm_expr:n RPAREN
+            {: RESULT = n; :}
             ;
