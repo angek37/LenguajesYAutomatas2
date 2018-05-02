@@ -16,13 +16,13 @@ parser code
 
 action code
 {:
-  Map<String, Integer> map = new HashMap<String, Integer>();
+  List l = new List();
 :}
 
 terminal GREATER, GREATEREQUAL, LESS, LESSEQUAL, EQUAL, NOTEQUAL;
 terminal DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
-terminal ID, ASSIGN, SEMI;
-terminal Boolean VERDADERO, FALSO;
+terminal ID, ASSIGN, SEMI, EXIT;
+terminal Boolean TRUE, FALSE;
 terminal Integer INTEGER;
 
 non terminal stmt, stmt_part, stmt_list, expr;
@@ -43,11 +43,15 @@ stmt        ::= stmt stmt_part
             ;
 
 stmt_part   ::= stmt_list SEMI
-            | error {:System.out.println("Error de sintaxis");:}
+            | error
+            {:System.out.println("Error de sintaxis");:}
             ;
 
 stmt_list   ::= expr
-            | ID ASSIGN expr
+            | ID:id ASSIGN expr:data
+            {: l.add(""+id, data); :}
+            | EXIT
+            {: System.exit(1); :}
             ;
 
 expr        ::= log_term
@@ -66,8 +70,8 @@ log_factor  ::= bool
             | LPAREN relation_expr RPAREN
             ;
 
-bool        ::= VERDADERO
-            | FALSO
+bool        ::= TRUE
+            | FALSE
             ;
 
 relation_expr ::= arithm_expr GREATER arithm_expr
@@ -78,16 +82,26 @@ relation_expr ::= arithm_expr GREATER arithm_expr
             | arithm_expr NOTEQUAL arithm_expr
             ;
 arithm_expr ::= arithm_term
-            | arithm_expr TIMES arithm_term
-            | arithm_expr DIVIDE arithm_term
+            | arithm_expr:e1 TIMES arithm_term:e2
+            {: RESULT = new Integer(e1.intValue() * e2.intValue()); :}
+            | arithm_expr:e1 DIVIDE arithm_term:e2
+            {: RESULT = new Integer(e1.intValue() / e2.intValue()); :}
             ;
 
 arithm_term ::= arithm_factor
-            | arithm_term PLUS arithm_factor
-            | arithm_term MINUS arithm_factor
+            | arithm_term:e1 PLUS arithm_factor:e2
+            {: RESULT = new Integer(e1.intValue() + e2.intValue()); :}
+            | arithm_term:e1 MINUS arithm_factor:e2
+            {: RESULT = new Integer(e1.intValue() - e2.intValue()); :}
             ;
 
-arithm_factor ::= ID
-            | INTEGER
+arithm_factor ::= ID:id
+            {:
+              if(l.Type(""+id).equals("Integer")){
+                RESULT = new Integer((Integer)l.get(""+id));
+              }
+            :}
+            | INTEGER: n
+            {: RESULT = n; :}
             | LPAREN arithm_expr RPAREN
             ;

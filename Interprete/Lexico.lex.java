@@ -234,18 +234,24 @@ class Yylex implements java_cup.runtime.Scanner {
 		/* 22 */ YY_NO_ANCHOR,
 		/* 23 */ YY_NO_ANCHOR,
 		/* 24 */ YY_NO_ANCHOR,
-		/* 25 */ YY_NO_ANCHOR
+		/* 25 */ YY_NO_ANCHOR,
+		/* 26 */ YY_NO_ANCHOR,
+		/* 27 */ YY_NO_ANCHOR,
+		/* 28 */ YY_NO_ANCHOR,
+		/* 29 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,258,
-"18:9,17:2,18,17:2,18:18,17,4,18:4,2,18,11,12,10,7,18,8,18,9,16,15:9,18,13,6" +
-",1,5,18:2,14:26,18:6,14:26,18,3,18:131,0:2")[0];
+"22:9,21:2,22,21:2,22:18,21,8,22:4,6,22,15,16,14,11,22,12,22,13,20,19:9,3,17" +
+",10,5,9,22:2,18:5,2,18:10,4,18:2,1,18:6,22:6,18:5,2,18:10,4,18:2,1,18:6,22," +
+"7,22:131,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,26,
-"0,1,2,3,4,5,6,1:7,7,8,1:7,9,1:2")[0];
+	private int yy_rmap[] = unpackFromString(1,30,
+"0,1,2:2,3,2,4,5,6,7,1:7,8,1:8,9,1,10,1")[0];
 
-	private int yy_nxt[][] = unpackFromString(10,19,
-"1,2,3,23,4,5,6,7,8,9,10,11,12,13,14,15,24,16,25,-1:20,17,-1:19,18,-1:17,20," +
-"-1:18,21,-1:18,22,-1:31,14:3,-1:17,15:2,-1:5,19,-1:15");
+	private int yy_nxt[][] = unpackFromString(11,23,
+"1,2,3,4,5,6,26,28,7,8,9,10,11,12,13,14,15,16,5,17,27,18,29,-1:24,5:2,-1,5,-" +
+"1:13,5:3,-1:6,19,-1:23,20,-1:22,23,-1:22,24,-1:22,25,-1:36,17:2,-1:8,21,-1:" +
+"23,22,-1:15");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -297,100 +303,116 @@ class Yylex implements java_cup.runtime.Scanner {
 					case -2:
 						break;
 					case 2:
-						{return new Symbol(sym.ASSIGN, new String(yytext()));}
+						{return new Symbol(sym.TRUE, new String(yytext()));}
 					case -3:
 						break;
 					case 3:
-						{System.out.println("Caracter ilegal: "+yytext());}
+						{return new Symbol(sym.FALSE, new String(yytext()));}
 					case -4:
 						break;
 					case 4:
-						{return new Symbol(sym.NOT, new String(yytext()));}
+						{System.out.println("Caracter ilegal: "+yytext());}
 					case -5:
 						break;
 					case 5:
-						{return new Symbol(sym.GREATER, new String(yytext()));}
+						{return new Symbol(sym.ID, new String(yytext()));}
 					case -6:
 						break;
 					case 6:
-						{return new Symbol(sym.LESS, new String(yytext()));}
+						{return new Symbol(sym.ASSIGN, new String(yytext()));}
 					case -7:
 						break;
 					case 7:
-						{return new Symbol(sym.PLUS, new String(yytext()));}
+						{return new Symbol(sym.NOT, new String(yytext()));}
 					case -8:
 						break;
 					case 8:
-						{return new Symbol(sym.MINUS, new String(yytext()));}
+						{return new Symbol(sym.GREATER, new String(yytext()));}
 					case -9:
 						break;
 					case 9:
-						{return new Symbol(sym.DIVIDE, new String(yytext()));}
+						{return new Symbol(sym.LESS, new String(yytext()));}
 					case -10:
 						break;
 					case 10:
-						{return new Symbol(sym.TIMES, new String(yytext()));}
+						{return new Symbol(sym.PLUS, new String(yytext()));}
 					case -11:
 						break;
 					case 11:
-						{return new Symbol(sym.LPAREN, new String(yytext()));}
+						{return new Symbol(sym.MINUS, new String(yytext()));}
 					case -12:
 						break;
 					case 12:
-						{return new Symbol(sym.RPAREN, new String(yytext()));}
+						{return new Symbol(sym.DIVIDE, new String(yytext()));}
 					case -13:
 						break;
 					case 13:
-						{return new Symbol(sym.SEMI, new String(yytext()));}
+						{return new Symbol(sym.TIMES, new String(yytext()));}
 					case -14:
 						break;
 					case 14:
-						{return new Symbol(sym.ID, new String(yytext()));}
+						{return new Symbol(sym.LPAREN, new String(yytext()));}
 					case -15:
 						break;
 					case 15:
-						{return new Symbol(sym.INTEGER, new Integer(yytext()));}
+						{return new Symbol(sym.RPAREN, new String(yytext()));}
 					case -16:
 						break;
 					case 16:
-						{ }
+						{return new Symbol(sym.SEMI, new String(yytext()));}
 					case -17:
 						break;
 					case 17:
-						{return new Symbol(sym.EQUAL, new String(yytext()));}
+						{return new Symbol(sym.INTEGER, new Integer(yytext()));}
 					case -18:
 						break;
 					case 18:
-						{return new Symbol(sym.AND, new String(yytext()));}
+						{ }
 					case -19:
 						break;
 					case 19:
-						{return new Symbol(sym.OR, new String(yytext()));}
+						{return new Symbol(sym.EXIT, new String(yytext()));}
 					case -20:
 						break;
 					case 20:
-						{return new Symbol(sym.NOTEQUAL, new String(yytext()));}
+						{return new Symbol(sym.EQUAL, new String(yytext()));}
 					case -21:
 						break;
 					case 21:
-						{return new Symbol(sym.GREATEREQUAL, new String(yytext()));}
+						{return new Symbol(sym.AND, new String(yytext()));}
 					case -22:
 						break;
 					case 22:
-						{return new Symbol(sym.LESSEQUAL, new String(yytext()));}
+						{return new Symbol(sym.OR, new String(yytext()));}
 					case -23:
 						break;
 					case 23:
-						{System.out.println("Caracter ilegal: "+yytext());}
+						{return new Symbol(sym.NOTEQUAL, new String(yytext()));}
 					case -24:
 						break;
 					case 24:
-						{return new Symbol(sym.INTEGER, new Integer(yytext()));}
+						{return new Symbol(sym.GREATEREQUAL, new String(yytext()));}
 					case -25:
 						break;
 					case 25:
-						{System.out.println("Caracter ilegal: "+yytext());}
+						{return new Symbol(sym.LESSEQUAL, new String(yytext()));}
 					case -26:
+						break;
+					case 26:
+						{System.out.println("Caracter ilegal: "+yytext());}
+					case -27:
+						break;
+					case 27:
+						{return new Symbol(sym.INTEGER, new Integer(yytext()));}
+					case -28:
+						break;
+					case 28:
+						{System.out.println("Caracter ilegal: "+yytext());}
+					case -29:
+						break;
+					case 29:
+						{System.out.println("Caracter ilegal: "+yytext());}
+					case -30:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);

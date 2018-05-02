@@ -15,6 +15,9 @@ import java_cup.runtime.Symbol;
 %eofval}
 %%
 
+"t" {return new Symbol(sym.TRUE, new String(yytext()));}
+"f" {return new Symbol(sym.FALSE, new String(yytext()));}
+":q" {return new Symbol(sym.EXIT, new String(yytext()));}
 "=" {return new Symbol(sym.ASSIGN, new String(yytext()));}
 "&&" {return new Symbol(sym.AND, new String(yytext()));}
 "||" {return new Symbol(sym.OR, new String(yytext()));}
@@ -34,7 +37,5 @@ import java_cup.runtime.Symbol;
 ";" {return new Symbol(sym.SEMI, new String(yytext()));}
 [A-Za-z]+[0-9a-zA-Z]* {return new Symbol(sym.ID, new String(yytext()));}
 0|[1-9][0-9]* {return new Symbol(sym.INTEGER, new Integer(yytext()));}
-"VERDADERO" {return new Symbol(sym.VERDADERO, new String(yytext()));}
-"FALSO" {return new Symbol(sym.FALSO, new String(yytext()));}
 [\t\r\n\f ] { }
 . {System.out.println("Caracter ilegal: "+yytext());}
