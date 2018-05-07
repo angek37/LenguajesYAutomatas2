@@ -25,7 +25,7 @@ terminal ID, ASSIGN, SEMI, EXIT;
 terminal Boolean TRUE, FALSE;
 terminal Integer INTEGER;
 
-non terminal stmt, stmt_part, stmt_list, expr;
+non terminal stmt, stmt_part, stmt_list, expr, emp;
 non terminal Integer arithm_expr, arithm_term, arithm_factor;
 non terminal Boolean relation_expr, log_term, log_factor, bool;
 
@@ -71,7 +71,15 @@ log_term    ::= log_factor:e1 AND log_factor:e2
             {: RESULT = e; :}
             ;
 
-log_factor  ::= bool:e
+log_factor  ::= ID:n emp
+            {:
+              if(l.Type(""+n).equals("Boolean")){
+                RESULT = new Boolean((Boolean)l.get(""+n));
+              }else {
+                System.out.println("La variable no es de tipo Boolean");
+              }
+            :}
+            | bool:e
             {: RESULT = e; :}
             | NOT log_factor:e
             {: RESULT = new Boolean(!e); :}
