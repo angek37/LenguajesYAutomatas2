@@ -1,0 +1,67 @@
+import java.io.*;
+import java_cup.runtime.*;
+
+parser code
+{:
+  public static void main(String[] args) throws Exception{
+    new parser(new Yylex(System.in)).parse();
+  }
+  public void Syntax_error(Symbol s){
+    report_error("Error de sintaxis linea"+ Integer.toString(Yylex.linea+1)+
+      "Columna: "+ Integer.toString(Yylex.pos + 1 ) + "En \""+ s.value + "\"", null);
+  }
+:}
+
+action code
+{:
+
+:}
+
+terminal CLASS, ACCESS, LBRACKET, RBRACKET, TYPEINT, TYPEDOUBLE, VOID;
+
+terminal GREATER, GREATEREQUAL, LESS, LESSEQUAL, EQUAL, NOTEQUAL;
+terminal DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
+terminal ID, ASSIGN, SEMI;
+terminal Double DOUBLE;
+terminal Integer INTEGER;
+
+non terminal program, decl, declstmt, stmts, type, value, function;
+
+
+precedence left AND, OR, NOT;
+precedence left EQUAL, NOTEQUAL;
+precedence left GREATER, GREATEREQUAL, LESS, LESSEQUAL;
+precedence left PLUS, MINUS;
+precedence left DIVIDE, TIMES;
+precedence left ASSIGN;
+
+program         ::=   ACCESS CLASS ID:id LBRACKET declstmt stmts RBRACKET
+                {: Tree t = new Tree(""+id, "clase"); :}
+                |     CLASS ID:id LBRACKET declstmt stmts RBRACKET
+                {: Tree t = new Tree(""+id, "clase"); :}
+                ;
+
+
+
+declstmt        ::=   decl declstmt
+                |
+                ;
+
+decl            ::=   type ID ASSIGN value SEMI
+                ;
+
+stmts           ::=   function stmts
+                |
+                ;
+
+function        ::=   ACCESS type ID LBRACKET RBRACKET
+                ;
+
+type            ::=   TYPEINT
+                |     TYPEDOUBLE
+                |     VOID
+                ;
+
+value           ::=   INTEGER
+                |     DOUBLE
+                ;

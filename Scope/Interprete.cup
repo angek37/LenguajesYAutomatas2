@@ -1,0 +1,139 @@
+import java.io.*;
+import java_cup.runtime.*;
+import java.util.HashMap;
+import java.util.Map;
+
+parser code
+{:
+  public static void main(String[] args) throws Exception{
+    new parser(new Yylex(System.in)).parse();
+  }
+  public void Syntax_error(Symbol s){
+    report_error("Error de sintaxis linea"+ Integer.toString(Yylex.linea+1)+
+      "Columna: "+ Integer.toString(Yylex.pos + 1 ) + "En \""+ s.value + "\"", null);
+  }
+:}
+
+action code
+{:
+  List l = new List();
+:}
+
+terminal GREATER, GREATEREQUAL, LESS, LESSEQUAL, EQUAL, NOTEQUAL;
+terminal DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
+terminal ID, ASSIGN, SEMI, EXIT;
+terminal Boolean TRUE, FALSE;
+terminal Integer INTEGER;
+
+non terminal stmt, stmt_part, stmt_list, expr, emp;
+non terminal Integer arithm_expr, arithm_term, arithm_factor;
+non terminal Boolean relation_expr, log_term, log_factor, bool;
+
+
+precedence left AND, OR, NOT;
+precedence left EQUAL, NOTEQUAL;
+precedence left GREATER, GREATEREQUAL, LESS, LESSEQUAL;
+precedence left PLUS, MINUS;
+precedence left DIVIDE, TIMES;
+precedence left ASSIGN;
+
+
+stmt        ::= stmt stmt_part
+            | stmt_part
+            ;
+
+stmt_part   ::= stmt_list SEMI
+            | error
+            {:System.out.println("Error de sintaxis");:}
+            ;
+
+stmt_list   ::= expr:e
+            {: System.out.println(e); :}
+            | ID:id ASSIGN expr:data
+            {: l.add(""+id, data); :}
+            | EXIT
+            {: System.exit(1); :}
+            ;
+
+expr        ::= log_term:e
+            {: RESULT = e; :}
+            | relation_expr:e
+            {: RESULT = e; :}
+            | arithm_expr:e
+            {: RESULT = e; :}
+            ;
+
+log_term    ::= log_factor:e1 AND log_factor:e2
+            {: RESULT = new Boolean(e1.booleanValue() && e2.booleanValue()); :}
+            | log_factor:e1 OR log_factor:e2
+            {: RESULT = new Boolean(e1.booleanValue() || e2.booleanValue()); :}
+            | log_factor:e
+            {: RESULT = e; :}
+            ;
+
+log_factor  ::= ID:n emp
+            {:
+              if(l.Type(""+n).equals("Boolean")){
+                RESULT = new Boolean((Boolean)l.get(""+n));
+              }else {
+                System.out.println("La variable no es de tipo Boolean");
+              }
+            :}
+            | bool:e
+            {: RESULT = e; :}
+            | NOT log_factor:e
+            {: RESULT = new Boolean(!e); :}
+            | LPAREN log_term:e RPAREN
+            {: RESULT = e; :}
+            | LPAREN relation_expr:e RPAREN
+            {: RESULT = e; :}
+            ;
+
+bool        ::= TRUE
+            {: RESULT = new Boolean(true); :}
+            | FALSE
+            {: RESULT = new Boolean(false); :}
+            ;
+
+relation_expr ::= arithm_expr:e1 GREATER arithm_expr:e2
+            {: RESULT = new Boolean(e1>e2); :}
+            | arithm_expr:e1 GREATEREQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1>=e2); :}
+            | arithm_expr:e1 LESS arithm_expr:e2
+            {: RESULT = new Boolean(e1<e2); :}
+            | arithm_expr:e1 LESSEQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1<=e2); :}
+            | arithm_expr:e1 EQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1==e2); :}
+            | arithm_expr:e1 NOTEQUAL arithm_expr:e2
+            {: RESULT = new Boolean(e1!=e2); :}
+            ;
+arithm_expr ::= arithm_term: n
+            {: RESULT = n; :}
+            | arithm_term:e1 TIMES arithm_term:e2
+            {: RESULT = new Integer(e1.intValue() * e2.intValue()); :}
+            | arithm_term:e1 DIVIDE arithm_term:e2
+            {: RESULT = new Integer(e1.intValue() / e2.intValue()); :}
+            ;
+
+arithm_term ::= arithm_factor: n
+            {: RESULT = n; :}
+            | arithm_factor:e1 PLUS arithm_factor:e2
+            {: RESULT = new Integer(e1.intValue() + e2.intValue()); :}
+            | arithm_factor:e1 MINUS arithm_factor:e2
+            {: RESULT = new Integer(e1.intValue() - e2.intValue()); :}
+            ;
+
+arithm_factor ::= ID:n
+            {:
+              if(l.Type(""+n).equals("Integer")){
+                RESULT = new Integer((Integer)l.get(""+n));
+              }else {
+                System.out.println("La variable no es de tipo Integer");
+              }
+            :}
+            | INTEGER: n
+            {: RESULT = n; :}
+            | LPAREN arithm_expr:n RPAREN
+            {: RESULT = n; :}
+            ;
