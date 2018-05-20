@@ -3,7 +3,7 @@ import java.util.NoSuchElementException;
 
 
 public class List implements Iterable<String>{
-	private Node<Object> head;
+	public Node<Object> head;
 
 	public List() {
 		head = null;
@@ -70,7 +70,7 @@ public class List implements Iterable<String>{
 		}
 		return b;
 	}
-	
+
 	public Node<Object> getNode(String id) {
 		Node<Object> tmp = head;
 
@@ -134,15 +134,16 @@ public class List implements Iterable<String>{
 		public Node<E> next;
 		public Node<E> parent;
 		public List children;
-		
+
 		public Node(){
-			
+			this.children = new List();
 		}
 
 		public Node(String identificator, E data, Node<E> next) {
 			this.identificator = identificator;
 			this.data = data;
 			this.next = next;
+			this.children = new List();
 		}
 	}
 
