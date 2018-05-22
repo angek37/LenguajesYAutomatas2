@@ -9,7 +9,7 @@ public class Tree<T> {
     }
 
     public void Print() {
-    		System.out.print("├── ");
+    		System.out.print("└── ");
     		System.out.print(root.identificator);
     		if(!root.children.isEmpty()) {
     			List.Node<Object> tmp = root.children.head;
@@ -50,7 +50,8 @@ public class Tree<T> {
     		t.root.children.add("b", 3.4);
     		t.root.children.add("c", 4.3);
     		t.root.children.add("d", 5.2);
-    		t.root.children.getNode("a").children.add("a.b", "LoL");
+    		t.root.children.getNode("a").children.add("a.b", "next level");
+    		t.root.children.getNode("a").children.getNode("a.b").children.add("a.b.c", "next level");
     		t.Print();
     }
 }
