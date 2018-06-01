@@ -19,8 +19,7 @@ action code
 
 terminal CLASS, ACCESS, LBRACKET, RBRACKET, TYPEINT, TYPEDOUBLE, VOID;
 
-terminal GREATER, GREATEREQUAL, LESS, LESSEQUAL, EQUAL, NOTEQUAL;
-terminal DIVIDE, TIMES, LPAREN, RPAREN, PLUS, MINUS, AND, OR, NOT;
+terminal LPAREN, RPAREN;
 terminal ID, ASSIGN, SEMI;
 terminal Double DOUBLE;
 terminal Integer INTEGER;
@@ -28,12 +27,6 @@ terminal Integer INTEGER;
 non terminal program, decl, declstmt, stmts, type, value, function;
 
 
-precedence left AND, OR, NOT;
-precedence left EQUAL, NOTEQUAL;
-precedence left GREATER, GREATEREQUAL, LESS, LESSEQUAL;
-precedence left PLUS, MINUS;
-precedence left DIVIDE, TIMES;
-precedence left ASSIGN;
 
 program         ::=   ACCESS CLASS ID:id LBRACKET declstmt stmts RBRACKET
                 {: t.initTree(""+id, "clase");
@@ -66,7 +59,7 @@ stmts           ::=   function stmts
                 |
                 ;
 
-function        ::=   ACCESS type ID:id LBRACKET declstmt RBRACKET
+function        ::=   ACCESS type ID:id LPAREN RPAREN LBRACKET declstmt RBRACKET
                 {:
                 t.root.children.add(""+id, new Object());
                 t.root.children.getNode(""+id).children = t.tmpL;
