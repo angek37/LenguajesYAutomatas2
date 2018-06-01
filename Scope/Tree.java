@@ -1,11 +1,17 @@
 public class Tree<T> {
-    private List.Node<T> root;
+    public List.Node<T> root;
+    public boolean current = false;
+    public String id = "";
+    public List tmpL = new List();
 
-    public Tree(String id, T rootData) {
-        root = new List.Node<T>();
+    public Tree() {
+      root = new List.Node<T>();
+      root.children = new List();
+    }
+
+    public void initTree(String id, T rootData) {
         root.identificator = id;
         root.data = rootData;
-        root.children = new List();
     }
 
     public void Print() {
@@ -21,6 +27,7 @@ public class Tree<T> {
     				tmp = tmp.next;
     			}
     		}
+        System.out.println("\n\n\n\n");
     }
 
     public void printList(List l, int level) {
@@ -41,17 +48,5 @@ public class Tree<T> {
     			tabs = tabs + "    ";
     		}
     		return tabs;
-    }
-
-
-    public static void main(String[] mr) {
-    		Tree<String> t = new Tree<String>("miClase", "");
-    		t.root.children.add("a", 2.5);
-    		t.root.children.add("b", 3.4);
-    		t.root.children.add("c", 4.3);
-    		t.root.children.add("d", 5.2);
-    		t.root.children.getNode("a").children.add("a.b", "next level");
-    		t.root.children.getNode("a").children.getNode("a.b").children.add("a.b.c", "next level");
-    		t.Print();
     }
 }

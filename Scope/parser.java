@@ -32,7 +32,7 @@ public class parser extends java_cup.runtime.lr_parser {
     unpackFromStrings(new String[] {
     "\000\016\000\002\002\011\000\002\002\004\000\002\002" +
     "\010\000\002\004\004\000\002\004\002\000\002\003\007" +
-    "\000\002\005\004\000\002\005\002\000\002\010\007\000" +
+    "\000\002\005\004\000\002\005\002\000\002\010\010\000" +
     "\002\006\003\000\002\006\003\000\002\006\003\000\002" +
     "\007\003\000\002\007\003" });
 
@@ -42,8 +42,8 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\043\000\006\004\005\005\006\001\002\000\004\002" +
-    "\045\001\002\000\004\032\040\001\002\000\004\004\007" +
+    "\000\044\000\006\004\005\005\006\001\002\000\004\002" +
+    "\046\001\002\000\004\032\041\001\002\000\004\004\007" +
     "\001\002\000\004\032\010\001\002\000\004\006\011\001" +
     "\002\000\014\005\ufffd\007\ufffd\010\013\011\017\012\016" +
     "\001\002\000\014\005\ufffd\007\ufffd\010\013\011\017\012" +
@@ -54,15 +54,16 @@ public class parser extends java_cup.runtime.lr_parser {
     "\ufff5\001\002\000\004\034\ufff4\001\002\000\004\034\025" +
     "\001\002\000\014\005\ufffc\007\ufffc\010\ufffc\011\ufffc\012" +
     "\ufffc\001\002\000\006\005\030\007\ufffa\001\002\000\004" +
-    "\007\035\001\002\000\010\010\013\011\017\012\016\001" +
+    "\007\036\001\002\000\010\010\013\011\017\012\016\001" +
     "\002\000\004\032\032\001\002\000\004\006\033\001\002" +
-    "\000\004\007\034\001\002\000\006\005\ufff9\007\ufff9\001" +
-    "\002\000\004\002\001\001\002\000\004\007\ufffb\001\002" +
-    "\000\006\005\ufffe\007\ufffe\001\002\000\004\006\041\001" +
-    "\002\000\014\005\ufffd\007\ufffd\010\013\011\017\012\016" +
-    "\001\002\000\006\005\030\007\ufffa\001\002\000\004\007" +
-    "\044\001\002\000\004\002\uffff\001\002\000\004\002\000" +
-    "\001\002" });
+    "\000\012\007\ufffd\010\013\011\017\012\016\001\002\000" +
+    "\004\007\035\001\002\000\006\005\ufff9\007\ufff9\001\002" +
+    "\000\004\002\001\001\002\000\004\007\ufffb\001\002\000" +
+    "\006\005\ufffe\007\ufffe\001\002\000\004\006\042\001\002" +
+    "\000\014\005\ufffd\007\ufffd\010\013\011\017\012\016\001" +
+    "\002\000\006\005\030\007\ufffa\001\002\000\004\007\045" +
+    "\001\002\000\004\002\uffff\001\002\000\004\002\000\001" +
+    "\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -70,20 +71,21 @@ public class parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\043\000\004\002\003\001\001\000\002\001\001\000" +
+    "\000\044\000\004\002\003\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\010\003\011\004\013\006\014\001\001\000" +
-    "\010\003\011\004\036\006\014\001\001\000\002\001\001" +
+    "\010\003\011\004\037\006\014\001\001\000\002\001\001" +
     "\000\006\005\026\010\025\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
     "\007\023\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\006\005\035\010\025" +
+    "\002\001\001\000\002\001\001\000\006\005\036\010\025" +
     "\001\001\000\002\001\001\000\004\006\030\001\001\000" +
+    "\002\001\001\000\002\001\001\000\010\003\011\004\033" +
+    "\006\014\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\010\003\011\004\041\006\014" +
-    "\001\001\000\006\005\042\010\025\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001" });
+    "\001\001\000\010\003\011\004\042\006\014\001\001\000" +
+    "\006\005\043\010\025\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -136,7 +138,7 @@ public class parser extends java_cup.runtime.lr_parser {
 class CUP$parser$actions {
 
 
-
+  Tree t = new Tree();
 
   private final parser parser;
 
@@ -166,7 +168,8 @@ class CUP$parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
 		Object id = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
-		 Tree t = new Tree(""+id, "clase"); 
+		 t.initTree(""+id, "clase");
+                t.Print();
               CUP$parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -192,7 +195,7 @@ class CUP$parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
 		Object id = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
-		 Tree t = new Tree(""+id, "clase"); 
+		 t.initTree(""+id, "clase"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -210,7 +213,9 @@ class CUP$parser$actions {
           case 4: // declstmt ::= 
             {
               Object RESULT =null;
-
+		
+                t.current = true;
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("declstmt",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -219,7 +224,20 @@ class CUP$parser$actions {
           case 5: // decl ::= type ID ASSIGN value SEMI 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object v = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		 if(t.current){
+                  t.tmpL.add(""+id, v);
+                  t.Print();
+                }else{
+                  t.root.children.add(""+id, v);
+                  t.Print();
+                }
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("decl",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -243,11 +261,18 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // function ::= ACCESS type ID LBRACKET RBRACKET 
+          case 8: // function ::= ACCESS type ID LBRACKET declstmt RBRACKET 
             {
               Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("function",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		
+                t.root.children.add(""+id, new Object());
+                t.root.children.getNode(""+id).children = t.tmpL;
+                t.tmpL = new List();
+                t.Print();
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("function",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
