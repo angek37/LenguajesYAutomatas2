@@ -17,7 +17,7 @@ action code
   Tree t = new Tree();
 :}
 
-terminal CLASS, ACCESS, LBRACKET, RBRACKET, TYPEINT, TYPEDOUBLE, TYPEBOOLEAN, VOID, IF;
+terminal CLASS, ACCESS, LBRACKET, RBRACKET, TYPEINT, TYPEDOUBLE, TYPEBOOLEAN, VOID, IF, WHILE;
 
 terminal LPAREN, RPAREN;
 terminal ID, ASSIGN, SEMI;
@@ -25,7 +25,7 @@ terminal Double DOUBLE;
 terminal Integer INTEGER;
 terminal boolean BOOLEAN;
 
-non terminal program, decl, declstmt, stmts, type, value, function, flowctrl;
+non terminal program, decl, declstmt, stmts, type, value, function, flowctrl, flow;
 
 
 
@@ -46,7 +46,8 @@ declstmt        ::=   decl declstmt
                 ;
 
 decl            ::=   type ID:id ASSIGN value:v SEMI
-                {: if(t.scope > 0){
+                {:
+                if(t.scope > 0){
                   if(t.scope > 1){
                     t.tmpR.add(""+id, v);
                     t.Print();
@@ -74,14 +75,26 @@ function        ::=   ACCESS type ID:id LPAREN RPAREN LBRACKET declstmt flowctrl
                 t.Print();:}
                 ;
 
-flowctrl        ::=   IF LPAREN RPAREN LBRACKET declstmt RBRACKET
+flowctrl        ::=   flow flowctrl
+                |
+                ;
+
+flow            ::=   IF LPAREN RPAREN LBRACKET declstmt RBRACKET
                 {:
-                t.tmpL.add("IF", "");
-                t.tmpL.getNode("IF").children = t.tmpR;
+                String tmp = t.getRandom();
+                t.tmpL.add(tmp, "");
+                t.tmpL.getNode(tmp).children = t.tmpR;
                 t.tmpR = new List();
                 t.scope --;
                 :}
-                |
+                |     WHILE LPAREN RPAREN LBRACKET declstmt RBRACKET
+                {:
+                String tmp = t.getRandom();
+                t.tmpL.add(tmp, "");
+                t.tmpL.getNode(tmp).children = t.tmpR;
+                t.tmpR = new List();
+                t.scope --;
+                :}
                 ;
 
 type            ::=   TYPEINT

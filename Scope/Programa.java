@@ -6,6 +6,9 @@ public class Programa {
     public void Func(){
       int c = 3;
       double d = 5.1;
+      while(){
+        boolean c = false;
+      }
     }
 
     public void update(){
@@ -13,6 +16,9 @@ public class Programa {
       double b = 4;
       if(){
         double r = 2.3;
+      }
+      if(){
+        int p = 3.2;
       }
     }
 }

@@ -50,4 +50,10 @@ public class Tree<T> {
     		}
     		return tabs;
     }
+
+    public String getRandom(){
+      double tmp = Math.random()*10000;
+      int r = (int)tmp;
+      return "@" + r;
+    }
 }

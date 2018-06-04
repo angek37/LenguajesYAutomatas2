@@ -19,6 +19,7 @@ true|false {return new Symbol(sym.BOOLEAN, new Boolean(yytext()));}
 "class" {return new Symbol(sym.CLASS, new String(yytext()));}
 "public"|"private" {return new Symbol(sym.ACCESS, new String(yytext()));}
 "if" {return new Symbol(sym.IF, new String(yytext()));}
+"while" {return new Symbol(sym.WHILE, new String(yytext()));}
 "{" {return new Symbol(sym.LBRACKET, new String(yytext()));}
 "}" {return new Symbol(sym.RBRACKET, new String(yytext()));}
 "int" {return new Symbol(sym.TYPEINT, new String(yytext()));}
