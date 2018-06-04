@@ -17,14 +17,15 @@ action code
   Tree t = new Tree();
 :}
 
-terminal CLASS, ACCESS, LBRACKET, RBRACKET, TYPEINT, TYPEDOUBLE, VOID;
+terminal CLASS, ACCESS, LBRACKET, RBRACKET, TYPEINT, TYPEDOUBLE, TYPEBOOLEAN, VOID, IF;
 
 terminal LPAREN, RPAREN;
 terminal ID, ASSIGN, SEMI;
 terminal Double DOUBLE;
 terminal Integer INTEGER;
+terminal boolean BOOLEAN;
 
-non terminal program, decl, declstmt, stmts, type, value, function;
+non terminal program, decl, declstmt, stmts, type, value, function, flowctrl;
 
 
 
@@ -40,14 +41,19 @@ program         ::=   ACCESS CLASS ID:id LBRACKET declstmt stmts RBRACKET
 declstmt        ::=   decl declstmt
                 |
                 {:
-                t.current = true;
+                t.scope ++;
                 :}
                 ;
 
 decl            ::=   type ID:id ASSIGN value:v SEMI
-                {: if(t.current){
+                {: if(t.scope > 0){
+                  if(t.scope > 1){
+                    t.tmpR.add(""+id, v);
+                    t.Print();
+                  }else {
                   t.tmpL.add(""+id, v);
                   t.Print();
+                  }
                 }else{
                   t.root.children.add(""+id, v);
                   t.Print();
@@ -59,19 +65,32 @@ stmts           ::=   function stmts
                 |
                 ;
 
-function        ::=   ACCESS type ID:id LPAREN RPAREN LBRACKET declstmt RBRACKET
+function        ::=   ACCESS type ID:id LPAREN RPAREN LBRACKET declstmt flowctrl RBRACKET
                 {:
                 t.root.children.add(""+id, new Object());
                 t.root.children.getNode(""+id).children = t.tmpL;
                 t.tmpL = new List();
+                t.scope --;
                 t.Print();:}
+                ;
+
+flowctrl        ::=   IF LPAREN RPAREN LBRACKET declstmt RBRACKET
+                {:
+                t.tmpL.add("IF", "");
+                t.tmpL.getNode("IF").children = t.tmpR;
+                t.tmpR = new List();
+                t.scope --;
+                :}
+                |
                 ;
 
 type            ::=   TYPEINT
                 |     TYPEDOUBLE
+                |     TYPEBOOLEAN
                 |     VOID
                 ;
 
 value           ::=   INTEGER
                 |     DOUBLE
+                |     BOOLEAN
                 ;

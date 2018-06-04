@@ -15,12 +15,15 @@ import java_cup.runtime.Symbol;
 %eofval}
 %%
 
+true|false {return new Symbol(sym.BOOLEAN, new Boolean(yytext()));}
 "class" {return new Symbol(sym.CLASS, new String(yytext()));}
 "public"|"private" {return new Symbol(sym.ACCESS, new String(yytext()));}
+"if" {return new Symbol(sym.IF, new String(yytext()));}
 "{" {return new Symbol(sym.LBRACKET, new String(yytext()));}
 "}" {return new Symbol(sym.RBRACKET, new String(yytext()));}
 "int" {return new Symbol(sym.TYPEINT, new String(yytext()));}
 "double" {return new Symbol(sym.TYPEDOUBLE, new String(yytext()));}
+"boolean" {return new Symbol(sym.TYPEBOOLEAN, new String(yytext()));}
 "void" {return new Symbol(sym.VOID, new String(yytext()));}
 "=" {return new Symbol(sym.ASSIGN, new String(yytext()));}
 "(" {return new Symbol(sym.LPAREN, new String(yytext()));}

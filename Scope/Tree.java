@@ -1,8 +1,9 @@
 public class Tree<T> {
     public List.Node<T> root;
-    public boolean current = false;
+    public int scope = 0;
     public String id = "";
     public List tmpL = new List();
+    public List tmpR = new List();
 
     public Tree() {
       root = new List.Node<T>();
@@ -20,7 +21,7 @@ public class Tree<T> {
     		if(!root.children.isEmpty()) {
     			List.Node<Object> tmp = root.children.head;
     			while(tmp != null) {
-    				System.out.print("\n    ├── " + tmp.identificator);
+    				System.out.print("\n|   ├── " + tmp.identificator);
     				if(!tmp.children.isEmpty()) {
     					printList(tmp.children, 2);
     				}
@@ -45,7 +46,7 @@ public class Tree<T> {
     public String Tabs(int q) {
     		String tabs = "";
     		for(int x = 0; x < q; x++) {
-    			tabs = tabs + "    ";
+    			tabs = tabs + "|   ";
     		}
     		return tabs;
     }

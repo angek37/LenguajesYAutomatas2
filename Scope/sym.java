@@ -6,22 +6,25 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int INTEGER = 15;
-  public static final int SEMI = 13;
-  public static final int VOID = 8;
-  public static final int EOF = 0;
-  public static final int DOUBLE = 14;
-  public static final int RBRACKET = 5;
-  public static final int ID = 11;
-  public static final int ASSIGN = 12;
-  public static final int TYPEDOUBLE = 7;
-  public static final int error = 1;
-  public static final int RPAREN = 10;
-  public static final int TYPEINT = 6;
-  public static final int LPAREN = 9;
-  public static final int LBRACKET = 4;
-  public static final int ACCESS = 3;
   public static final int CLASS = 2;
+  public static final int RPAREN = 12;
+  public static final int SEMI = 15;
+  public static final int TYPEINT = 6;
+  public static final int ACCESS = 3;
+  public static final int IF = 10;
+  public static final int LBRACKET = 4;
+  public static final int LPAREN = 11;
+  public static final int ID = 13;
+  public static final int RBRACKET = 5;
+  public static final int BOOLEAN = 18;
+  public static final int EOF = 0;
+  public static final int TYPEDOUBLE = 7;
+  public static final int TYPEBOOLEAN = 8;
+  public static final int error = 1;
+  public static final int ASSIGN = 14;
+  public static final int INTEGER = 17;
+  public static final int VOID = 9;
+  public static final int DOUBLE = 16;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -31,14 +34,17 @@ public class sym {
   "RBRACKET",
   "TYPEINT",
   "TYPEDOUBLE",
+  "TYPEBOOLEAN",
   "VOID",
+  "IF",
   "LPAREN",
   "RPAREN",
   "ID",
   "ASSIGN",
   "SEMI",
   "DOUBLE",
-  "INTEGER"
+  "INTEGER",
+  "BOOLEAN"
   };
 }
 
