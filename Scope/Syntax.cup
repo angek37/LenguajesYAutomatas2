@@ -60,6 +60,21 @@ decl            ::=   type ID:id ASSIGN value:v SEMI
                   t.Print();
                 }
                 :}
+                |     ID:id ASSIGN value:v SEMI
+                {:
+                if(t.scope > 0){
+                  if(t.scope > 1){
+                    t.tmpR.add(""+id, v);
+                    t.Print();
+                  }else {
+                  t.tmpL.add(""+id, v);
+                  t.Print();
+                  }
+                }else{
+                  t.root.children.add(""+id, v);
+                  t.Print();
+                }
+                :}
                 ;
 
 stmts           ::=   function stmts

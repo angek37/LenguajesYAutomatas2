@@ -5,6 +5,7 @@ public class Programa {
 
     public void Func(){
       int c = 3;
+      c = 10;
       double d = 5.1;
       while(){
         boolean c = false;
