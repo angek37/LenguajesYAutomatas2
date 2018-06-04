@@ -329,7 +329,7 @@ class CUP$parser$actions {
               Object RESULT =null;
 		
                 String tmp = t.getRandom();
-                t.tmpL.add(tmp, "");
+                t.tmpL.add(tmp, tmp + "");
                 t.tmpL.getNode(tmp).children = t.tmpR;
                 t.tmpR = new List();
                 t.scope --;
@@ -344,7 +344,7 @@ class CUP$parser$actions {
               Object RESULT =null;
 		
                 String tmp = t.getRandom();
-                t.tmpL.add(tmp, "");
+                t.tmpL.add(tmp, tmp + "");
                 t.tmpL.getNode(tmp).children = t.tmpR;
                 t.tmpR = new List();
                 t.scope --;
@@ -393,7 +393,10 @@ class CUP$parser$actions {
           case 17: // value ::= INTEGER 
             {
               Object RESULT =null;
-
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Integer n = (Integer)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = n; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("value",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -402,7 +405,10 @@ class CUP$parser$actions {
           case 18: // value ::= DOUBLE 
             {
               Object RESULT =null;
-
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Double n = (Double)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = n; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("value",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -411,7 +417,10 @@ class CUP$parser$actions {
           case 19: // value ::= BOOLEAN 
             {
               Object RESULT =null;
-
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		boolean n = (boolean)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = n; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("value",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

@@ -21,7 +21,7 @@ public class Tree<T> {
     		if(!root.children.isEmpty()) {
     			List.Node<Object> tmp = root.children.head;
     			while(tmp != null) {
-    				System.out.print("\n|   ├── " + tmp.identificator);
+    				System.out.print("\n|   ├── " + tmp.identificator + " - " + tmp.data);
     				if(!tmp.children.isEmpty()) {
     					printList(tmp.children, 2);
     				}
@@ -35,7 +35,7 @@ public class Tree<T> {
     		List.Node<Object> tmp = l.head;
     		String tab = Tabs(level);
     		while(tmp != null) {
-    			System.out.print("\n" + tab + "├── " + tmp.identificator);
+    			System.out.print("\n" + tab + "├── " + tmp.identificator + " - " + tmp.data);
     			if(!tmp.children.isEmpty()) {
     				printList(tmp.children, level + 1);
     			}

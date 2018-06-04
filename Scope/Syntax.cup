@@ -82,7 +82,7 @@ flowctrl        ::=   flow flowctrl
 flow            ::=   IF LPAREN RPAREN LBRACKET declstmt RBRACKET
                 {:
                 String tmp = t.getRandom();
-                t.tmpL.add(tmp, "");
+                t.tmpL.add(tmp, tmp + "");
                 t.tmpL.getNode(tmp).children = t.tmpR;
                 t.tmpR = new List();
                 t.scope --;
@@ -90,7 +90,7 @@ flow            ::=   IF LPAREN RPAREN LBRACKET declstmt RBRACKET
                 |     WHILE LPAREN RPAREN LBRACKET declstmt RBRACKET
                 {:
                 String tmp = t.getRandom();
-                t.tmpL.add(tmp, "");
+                t.tmpL.add(tmp, tmp + "");
                 t.tmpL.getNode(tmp).children = t.tmpR;
                 t.tmpR = new List();
                 t.scope --;
@@ -103,7 +103,10 @@ type            ::=   TYPEINT
                 |     VOID
                 ;
 
-value           ::=   INTEGER
-                |     DOUBLE
-                |     BOOLEAN
+value           ::=   INTEGER:n
+                {: RESULT = n; :}
+                |     DOUBLE:n
+                {: RESULT = n; :}
+                |     BOOLEAN:n
+                {: RESULT = n; :}
                 ;
